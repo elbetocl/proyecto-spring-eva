@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  validation:
+    email-regex: '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$'
+    password-regex: '^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$' # configurable: min 8, at least one upper, one lower, one digit
+  jwt:
+    secret: 'cambiar_este_secreto_por_un_valor_mas_seguro_2025'
+    expiration-ms: 86400000
+
+external:
+  email:
+    url: http://localhost:9999/mock/email
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 2
+        minimumNumberOfCalls: 3
+    instances:
+      emailService:
+        baseConfig: default
