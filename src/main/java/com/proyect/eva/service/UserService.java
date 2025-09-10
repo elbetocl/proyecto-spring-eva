@@ -53,7 +53,7 @@ public class UserService {
                 .build();
         
         List<Phone> phones = request.getPhones().stream()
-                .map(phoneDto -> Phone.builder()
+                .<Phone>map(phoneDto -> Phone.builder()
                         .number(phoneDto.getNumber())
                         .citycode(phoneDto.getCitycode())
                         .contrycode(phoneDto.getContrycode())
@@ -69,7 +69,7 @@ public class UserService {
     
     public List<UserResponseDto> getAllUsers() {
         return userRepository.findAll().stream()
-                .map(userMapper::toResponseDto)
+                .<UserResponseDto>map(userMapper::toResponseDto)
                 .toList();
     }
     
@@ -96,7 +96,7 @@ public class UserService {
         
         user.getPhones().clear();
         List<Phone> phones = request.getPhones().stream()
-                .map(phoneDto -> Phone.builder()
+                .<Phone>map(phoneDto -> Phone.builder()
                         .number(phoneDto.getNumber())
                         .citycode(phoneDto.getCitycode())
                         .contrycode(phoneDto.getContrycode())
@@ -133,7 +133,7 @@ public class UserService {
         if (request.getPhones() != null) {
             user.getPhones().clear();
             List<Phone> phones = request.getPhones().stream()
-                    .map(phoneDto -> Phone.builder()
+                    .<Phone>map(phoneDto -> Phone.builder()
                             .number(phoneDto.getNumber())
                             .citycode(phoneDto.getCitycode())
                             .contrycode(phoneDto.getContrycode())
