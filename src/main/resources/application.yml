@@ -9,8 +9,18 @@ spring:
     password:
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop
     show-sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: true
+        trace: false
+  jackson:
+    date-format: dd/MM/yyyy HH:mm:ss
+    time-zone: America/Santiago
 
 app:
   validation:
