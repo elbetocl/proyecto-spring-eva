@@ -171,6 +171,50 @@ Todos los errores siguen el formato:
 - **Exception Handler**: Para manejo centralizado de errores
 - **Dependency Injection**: Con Spring Framework
 
+## Pruebas Implementadas
+
+### Tipos de Pruebas
+
+#### **🧪 Pruebas Unitarias**
+- **UserServiceTest**: Tests de lógica de negocio
+  - ✅ `createUser_Success()` - Creación exitosa de usuario
+  - ✅ `createUser_EmailAlreadyExists()` - Validación email duplicado
+  - ✅ `getUserById_Success()` - Obtención de usuario por ID
+  - ✅ `getUserById_NotFound()` - Usuario no encontrado
+  - ✅ `deleteUser_Success()` - Eliminación exitosa
+  - ✅ `deleteUser_NotFound()` - Error al eliminar usuario inexistente
+
+#### **🏗️ Pruebas de Integración**
+- **EvaApplicationTests**: Test de contexto Spring
+  - ✅ `contextLoads()` - Verificación de carga de contexto
+  - ✅ Configuración de beans
+  - ✅ Conexión a base de datos H2
+  - ✅ Inicialización de componentes
+
+### Herramientas de Testing
+- **JUnit 5**: Framework de testing moderno
+- **Mockito**: Mocking de dependencias
+- **Spring Boot Test**: Tests de integración
+- **@ExtendWith(MockitoExtension.class)**: Integración Mockito-JUnit
+
+### Cobertura de Pruebas
+- ✅ **Capa de Servicio**: Lógica de negocio completa
+- ✅ **Manejo de Excepciones**: Casos de error
+- ✅ **Validaciones**: Email y password
+- ✅ **Contexto Spring**: Configuración correcta
+
+### Ejecutar Pruebas
+```bash
+# Ejecutar todas las pruebas
+mvn test
+
+# Ejecutar con reporte detallado
+mvn test -Dtest.verbose=true
+
+# Ejecutar pruebas específicas
+mvn test -Dtest=UserServiceTest
+```
+
 ## Tecnologías Utilizadas
 
 - Spring Boot 3.2.0
