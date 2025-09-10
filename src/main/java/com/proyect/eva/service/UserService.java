@@ -40,14 +40,25 @@ public class UserService {
         }
         
         String token = jwtService.generateToken(request.getEmail());
-        User user = new User(request.getName(), request.getEmail(), request.getPassword(), token);
+        
+        User user = User.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .token(token)
+                .created(LocalDateTime.now())
+                .modified(LocalDateTime.now())
+                .lastLogin(LocalDateTime.now())
+                .isactive(true)
+                .build();
         
         List<Phone> phones = request.getPhones().stream()
-                .map(phoneDto -> {
-                    Phone phone = new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getContrycode());
-                    phone.setUser(user);
-                    return phone;
-                })
+                .map(phoneDto -> Phone.builder()
+                        .number(phoneDto.getNumber())
+                        .citycode(phoneDto.getCitycode())
+                        .contrycode(phoneDto.getContrycode())
+                        .user(user)
+                        .build())
                 .toList();
         
         user.setPhones(phones);
@@ -85,11 +96,12 @@ public class UserService {
         
         user.getPhones().clear();
         List<Phone> phones = request.getPhones().stream()
-                .map(phoneDto -> {
-                    Phone phone = new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getContrycode());
-                    phone.setUser(user);
-                    return phone;
-                })
+                .map(phoneDto -> Phone.builder()
+                        .number(phoneDto.getNumber())
+                        .citycode(phoneDto.getCitycode())
+                        .contrycode(phoneDto.getContrycode())
+                        .user(user)
+                        .build())
                 .toList();
         user.getPhones().addAll(phones);
         
@@ -121,11 +133,12 @@ public class UserService {
         if (request.getPhones() != null) {
             user.getPhones().clear();
             List<Phone> phones = request.getPhones().stream()
-                    .map(phoneDto -> {
-                        Phone phone = new Phone(phoneDto.getNumber(), phoneDto.getCitycode(), phoneDto.getContrycode());
-                        phone.setUser(user);
-                        return phone;
-                    })
+                    .map(phoneDto -> Phone.builder()
+                            .number(phoneDto.getNumber())
+                            .citycode(phoneDto.getCitycode())
+                            .contrycode(phoneDto.getContrycode())
+                            .user(user)
+                            .build())
                     .toList();
             user.getPhones().addAll(phones);
         }

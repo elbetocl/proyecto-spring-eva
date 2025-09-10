@@ -14,6 +14,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -48,8 +49,17 @@ class UserServiceTest {
         PhoneDto phone = new PhoneDto("1234567", "1", "57");
         userRequest = new UserRequestDto("Juan Rodriguez", "juan@rodriguez.org", "hunter2", List.of(phone));
         
-        user = new User("Juan Rodriguez", "juan@rodriguez.org", "hunter2", "token123");
-        user.setId(UUID.randomUUID());
+        user = User.builder()
+                .id(UUID.randomUUID())
+                .name("Juan Rodriguez")
+                .email("juan@rodriguez.org")
+                .password("hunter2")
+                .token("token123")
+                .created(LocalDateTime.now())
+                .modified(LocalDateTime.now())
+                .lastLogin(LocalDateTime.now())
+                .isactive(true)
+                .build();
         
         userResponse = new UserResponseDto();
         userResponse.setId(user.getId());
