@@ -215,6 +215,27 @@ mvn test -Dtest.verbose=true
 mvn test -Dtest=UserServiceTest
 ```
 
+### Verificar Funcionamiento
+
+Una vez levantada la aplicación con `mvn spring-boot:run`, puedes verificar que todo funciona correctamente accediendo a:
+
+**📋 Swagger UI (Documentación Interactiva)**
+```
+http://localhost:8080/swagger-ui.html
+```
+
+En Swagger podrás:
+- ✅ **Ver todos los endpoints** disponibles
+- ✅ **Probar la API** directamente desde el navegador
+- ✅ **Ver ejemplos** de request/response
+- ✅ **Validar** que todos los métodos HTTP funcionan
+- ✅ **Revisar** la documentación automática
+
+**🔧 Otras URLs útiles:**
+- **API Base**: `http://localhost:8080/api/users`
+- **OpenAPI JSON**: `http://localhost:8080/v3/api-docs`
+- **H2 Console**: `http://localhost:8080/h2-console`
+
 ## Tecnologías Utilizadas
 
 - Spring Boot 3.2.0
